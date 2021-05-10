@@ -41,7 +41,7 @@ public class User extends AbstractNamedEntity implements Serializable {
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role"}, name = "user_roles_unique_idx")})
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
-   // @OnDelete(action= OnDeleteAction.CASCADE)
+   //@OnDelete(action= OnDeleteAction.CASCADE)
     private Set<Role> roles;
 
 }

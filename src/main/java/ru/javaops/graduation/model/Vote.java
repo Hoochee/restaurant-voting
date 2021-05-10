@@ -6,10 +6,11 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "votes", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id", "date_time"}, name = "meals_unique_restaurant_datetime_idx")})
+@Table(name = "votes", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id", "date", "user_id"}, name = "votes_unique_restaurant_date_user_idx")})
 @Getter
 @Setter
 @AllArgsConstructor
@@ -27,8 +28,8 @@ public class Vote extends AbstractBaseEntity implements Serializable {
     @NotNull
     private User user;
 
-    @Column(name = "date_time",nullable = false,columnDefinition = "timestamp default now()")
+    @Column(name = "date",nullable = false,columnDefinition = "timestamp default now()")
     @NotNull
-    private LocalDateTime dateTime;
+    private LocalDate date;
 
 }

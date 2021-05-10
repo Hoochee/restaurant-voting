@@ -18,7 +18,7 @@ import java.util.Set;
 @ToString(callSuper = true)
 public class Restaurant extends AbstractNamedEntity implements Serializable {
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
     @OnDelete(action= OnDeleteAction.CASCADE)
     private List<Dish> dishes;
 }

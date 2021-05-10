@@ -1,5 +1,6 @@
 package ru.javaops.graduation.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jdk.jfr.Enabled;
 import lombok.*;
 import org.hibernate.validator.constraints.Range;
@@ -22,7 +23,8 @@ public class Dish extends AbstractNamedEntity implements Serializable {
     @Range(min=1,max=5000)
     private Integer price;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id", nullable = false)
+    @JsonBackReference
     private Restaurant restaurant;
 }
