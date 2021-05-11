@@ -1,5 +1,6 @@
 package ru.javaops.graduation.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -13,12 +14,17 @@ import java.util.Set;
 @Table(name = "restaurants",uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "restaurant_unique_name_idx")})
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString(callSuper = true)
+
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString(callSuper = true,  exclude = {"menus", "votes"})
 public class Restaurant extends AbstractNamedEntity implements Serializable {
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     @OnDelete(action= OnDeleteAction.CASCADE)
-    private List<Dish> dishes;
+    @JsonBackReference
+    private List<Menu> menus;
+
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private List<Vote> votes;
 }

@@ -8,14 +8,14 @@ import org.hibernate.validator.constraints.Range;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
-@Table(name="dishes")
+@Table(name = "dishes", uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "dishes_unique_name_idx")})
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString(callSuper = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString(callSuper = true,exclude = "menus")
 public class Dish extends AbstractNamedEntity implements Serializable {
 
     @Column(name = "price",nullable = false)
@@ -23,8 +23,12 @@ public class Dish extends AbstractNamedEntity implements Serializable {
     @Range(min=1,max=5000)
     private Integer price;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "restaurant_id", nullable = false)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "dish")
     @JsonBackReference
-    private Restaurant restaurant;
+    private List<Menu> menus;
+
+    public Dish(Integer id, String name, @NotNull @Range(min = 1, max = 5000) Integer price) {
+        super(id, name);
+        this.price = price;
+    }
 }
