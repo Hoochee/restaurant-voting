@@ -12,7 +12,7 @@ import ru.javaops.graduation.reppository.RestaurantRepository;
 
 import java.util.List;
 
-@RestController
+/*@RestController
 @RequestMapping(value = AdminRestaurantController.URL)
 @AllArgsConstructor
 @Slf4j
@@ -40,4 +40,4 @@ public class AdminRestaurantController {
         return ResponseEntity.of(restaurantRepository.findById(id));
     }
 
-}
+}*/

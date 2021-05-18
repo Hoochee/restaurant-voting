@@ -19,12 +19,18 @@ import java.util.Set;
 @ToString(callSuper = true,  exclude = {"menus", "votes"})
 public class Restaurant extends AbstractNamedEntity implements Serializable {
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    /*@OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     @OnDelete(action= OnDeleteAction.CASCADE)
     @JsonBackReference
-    private List<Menu> menus;
+    private List<Menu> menus;*/
 
     @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
     @JsonBackReference
     private List<Vote> votes;
+
+   @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    @JsonBackReference
+    private List<Dish> dishes;
+
 }

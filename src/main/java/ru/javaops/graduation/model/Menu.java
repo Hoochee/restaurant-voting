@@ -1,3 +1,4 @@
+/*
 package ru.javaops.graduation.model;
 
 import lombok.*;
@@ -43,3 +44,4 @@ public class Menu extends AbstractBaseEntity implements Serializable {
         this.date = date;
     }
 }
+*/
